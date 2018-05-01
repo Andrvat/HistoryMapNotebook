@@ -65,23 +65,11 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
 
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
-        ArrayList<String> arrayList = dataBaseHelper.getCoordinations();
-
-
-
-        ArrayList<String> coordination = new ArrayList<>();
-        ArrayList<String> name = new ArrayList<>();
-        coordination.add("55.52233888063213;35.81689260028917"); // Бородино
-        name.add("Бородинское сражение");
+        ArrayList<String> coordination = dataBaseHelper.getCoordinations();
         String info = "Нажмите на окно, чтобы узнать ход событий";
-        coordination.add("58.7432452887556;27.501958823433725"); // Ледовое побоище
-        name.add("Ледовое побоище");
-        coordination.add("49.691187;25.350061");
-        name.add("Брусиловский прорыв");
-        coordination.add("51.582120;35.508284");
-        name.add("Битва на Курской дуге");
-        coordination.add("54.638549;35.956314");
-        name.add("Стояние на Угре");
+        ArrayList<String> name = dataBaseHelper.getTitles();
+        ArrayList<String> color = dataBaseHelper.getColor();
+
 
 
         // Добавляет маркеры
@@ -93,7 +81,7 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(geoCoordination) // Добавляем маркер на карту
                     .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)) // Задаём цвет маркеру
+                    .icon(BitmapDescriptorFactory.defaultMarker()) // Задаём цвет маркеру
                     .snippet(info));// Задаём нижнее описание
             marker.setTag(i); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
