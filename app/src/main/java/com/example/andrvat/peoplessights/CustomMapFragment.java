@@ -69,7 +69,6 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
 
 
 
-
         ArrayList<String> coordination = new ArrayList<>();
         ArrayList<String> name = new ArrayList<>();
         coordination.add("55.52233888063213;35.81689260028917"); // Бородино
@@ -99,7 +98,6 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
             marker.setTag(i); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
         }
-
 
 
         mMap.setOnInfoWindowClickListener((GoogleMap.OnInfoWindowClickListener) this); // Нужна, чтобы обрабатывать действия при нажатии на окно
