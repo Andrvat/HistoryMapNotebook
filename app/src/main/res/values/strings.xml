@@ -1,0 +1,20 @@
+<resources>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="app_name">История на карте мира</string>
+    <string name="choose_language">Язык</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="open_map">Открыть карту</string>
+    <string name="get_help">Помощь</string>
+    <string name="get_about">О программе</string>
+    <string name="get_list">Список событий</string>
+    <string name="go_home">Домой</string>
+    <string name="history_app">История на карте мира</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

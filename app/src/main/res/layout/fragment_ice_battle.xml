@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IceBattle">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:text="Ледовое побоище"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="      В 1242 году немецкие рыцари из Ливонского ордена захватили Псков и подступили к Новгороду. Новгородцы, за год до того поссорившиеся с князем Александром, обратились к нему за помощью и вновь передали ему власть. Князь собрал войско, изгнал врагов из новгородской и псковской земли и вышел к Чудскому озеру."
+                android:textAlignment="textStart"
+                android:textSize="15sp"  />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/ice1" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="      На льду озера в 1242 году в сражении, известном как Ледовое побоище, Александр Ярославич уничтожил войско немецких рыцарей. Русские стрелки, несмотря на натиск немцев, прорывавших полки в центре, мужественно противостояли нападавшим. Эта смелость помогла русским окружить рыцарей с флангов и победить. Преследуя уцелевших целых семь верст, Александр показал твердость русского войска. Победа в битве привела к подписанию мирного соглашения между Новгородом и Ливонским орденом».
+"
+                android:textSize="15sp"/>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/ice2" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

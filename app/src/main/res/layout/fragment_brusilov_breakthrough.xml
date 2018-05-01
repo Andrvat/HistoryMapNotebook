@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BrusilovBreakthrough">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:text="Брусиловский прорыв"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="      Одной из важнейших операций на Восточном фронте 1916 года стало наступление на Юго-Западном фронте, призванное не только переломить ход военных действий на Восточном фронте, но и прикрыть наступление союзников на Сомме. Результатом стал Брусиловский прорыв, который существенно подорвал военную мощь австро-венгерской армии и подтолкнул Румынию к вступлению в войну на стороне Антанты."
+                android:textAlignment="textStart"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/bru1" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="      Наступательная операция Юго-Западного фронта под командованием генерала Алексея Брусилова, проведенная с мая по сентябрь 1916 года, стала, по мнению военного историка Антона Керсновского, «победой, какой в мировую войну мы ещё не одерживали». Впечатляет и количество сил, которые были задействованы с обеих сторон – 1 732 000 русских солдат и 1 061 000 солдат австро-венгерской и германской армий. "
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/brunomars" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
