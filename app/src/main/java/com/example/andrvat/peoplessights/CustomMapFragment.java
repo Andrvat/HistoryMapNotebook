@@ -5,32 +5,23 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CustomMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
@@ -72,8 +63,10 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
 
 
 
+
+
         // Добавляет маркеры
-        for (int i = 0; i < 5; i++) { // Циклом проходим по всем маркерам
+        for (int i = 0; i < name.size(); i++) { // Циклом проходим по всем маркерам
             String[] coordinationNow = coordination.get(i).split(";"); // Разделяем их координаты по ";"
             double first = Double.parseDouble(coordinationNow[0]);
             double second = Double.parseDouble(coordinationNow[1]);
@@ -81,7 +74,7 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(geoCoordination) // Добавляем маркер на карту
                     .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
-                    .icon(BitmapDescriptorFactory.defaultMarker()) // Задаём цвет маркеру
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)) // Задаём цвет маркеру
                     .snippet(info));// Задаём нижнее описание
             marker.setTag(i); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));

@@ -4,7 +4,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class DataBaseHelper extends SQLiteOpenHelper{
@@ -14,7 +20,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     }
 
     public DataBaseHelper(Context context){
-        super(context, "test_db_info_three", null, 1);
+        super(context, "test_db_info_four", null, 1);
     }
 
     //Выполняется при создании базы данных, нужно написать код для создания таблиц
@@ -34,6 +40,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 "    pictureTwo TEXT \n" +
                 ")";
         sqLiteDatabase.execSQL(sqlQuery1); //Этот метод позволяет выполнить любой SQL-запрос
+
+
 
         String addPit = "INSERT INTO actions (_id, title, Latitude, Longitude, colorMarker, Tag, descriptionOne, descriptionTwo, pictureOne, pictureTwo) VALUES (1, 'Бородинское сражение', 55.52233888063213, 35.81689260028917, 'Blue', 1, '      26 августа 1812 года в сражении под деревней Бородино в 125 километрах западнее Москвы сошлись значительные силы французской и русской армий. Регулярные войска под командованием Наполеона насчитывали около 137 тыс. человек, армия Михаила Кутузова с примкнувшими к ней казаками и ополчением достигала 120 тыс. Пересеченная местность позволяла незаметно перемещать резервы, а на возвышениях установить артиллерийские батареи. 24 августа Наполеон подошел к Шевардинскому редуту, стоявшему близ одноименной деревни, в трех верстах перед Бородинским полем.', '      Бородинская битва началась через день после боя у Шевардинского редута и стала самым масштабным сражением в войне 1812 года. Потери с обеих сторон были колоссальные: французы потеряли 28 тысяч человек, русские — 46,5 тысяч. Хотя Кутузов после битвы отдал приказ об отступлении к Москве, в донесении Александру I победителем в сражении он называл русскую армию. Так считают и многие российские историки. Иначе видят бой при Бородине французские ученые. По их мнению, «в битве у Москвы-реки» победили наполеоновские войска. Сам Наполеон, осмысливая результаты битвы, сказал: «Французы в ней показали себя достойными одержать победу, а русские стяжали право быть непобедимыми».', 'bor1.jpg', 'bor2.jpg');";
         sqLiteDatabase.execSQL(addPit);

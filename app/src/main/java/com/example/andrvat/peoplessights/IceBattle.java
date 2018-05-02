@@ -6,7 +6,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 
 
 public class IceBattle extends Fragment {
@@ -22,6 +22,7 @@ public class IceBattle extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ice_battle, container, false);
+
     }
 
 }
