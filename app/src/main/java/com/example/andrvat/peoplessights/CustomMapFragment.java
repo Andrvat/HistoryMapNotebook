@@ -68,7 +68,7 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
         ArrayList<String> coordination = dataBaseHelper.getCoordinations();
         String info = "Нажмите на окно, чтобы узнать ход событий";
         ArrayList<String> name = dataBaseHelper.getTitles();
-        ArrayList<String> color = dataBaseHelper.getColor();
+        ArrayList<String> colors = dataBaseHelper.getColor();
 
 
 
