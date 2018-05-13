@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,7 +55,6 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
     public void onMapReady(GoogleMap googleMap) {
         GoogleMap mMap = googleMap;
 
-
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         ArrayList<String> coordination = dataBaseHelper.getCoordinations();
         String info = "Нажмите на окно, чтобы узнать ход событий";
@@ -67,28 +67,50 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
 
         // Добавляет маркеры
         for (int i = 0; i < name.size(); i++) { // Циклом проходим по всем маркерам
-            String[] coordinationNow = coordination.get(i).split(";"); // Разделяем их координаты по ";"
-            double first = Double.parseDouble(coordinationNow[0]);
-            double second = Double.parseDouble(coordinationNow[1]);
-            LatLng geoCoordination = new LatLng(first, second); // Создаём маркер
-            Marker marker = mMap.addMarker(new MarkerOptions()
-                    .position(geoCoordination) // Добавляем маркер на карту
-                    .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)) // Задаём цвет маркеру
-                    .snippet(info));// Задаём нижнее описание
-            marker.setTag(i); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
+            if (colors.get(i).equals("Red")) {
+                String[] coordinationNow = coordination.get(i).split(";"); // Разделяем их координаты по ";"
+                double first = Double.parseDouble(coordinationNow[0]);
+                double second = Double.parseDouble(coordinationNow[1]);
+                LatLng geoCoordination = new LatLng(first, second); // Создаём маркер
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(geoCoordination) // Добавляем маркер на карту
+                        .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)) // Задаём цвет маркеру
+                        .snippet(info));// Задаём нижнее описание
+                marker.setTag(i); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
+            } else if (colors.get(i).equals("Blue")) {
+                String[] coordinationNow = coordination.get(i).split(";"); // Разделяем их координаты по ";"
+                double first = Double.parseDouble(coordinationNow[0]);
+                double second = Double.parseDouble(coordinationNow[1]);
+                LatLng geoCoordination = new LatLng(first, second); // Создаём маркер
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(geoCoordination) // Добавляем маркер на карту
+                        .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)) // Задаём цвет маркеру
+                        .snippet(info));// Задаём нижнее описание
+                marker.setTag(i); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
+            } else if (colors.get(i).equals("Yellow")) {
+                String[] coordinationNow = coordination.get(i).split(";"); // Разделяем их координаты по ";"
+                double first = Double.parseDouble(coordinationNow[0]);
+                double second = Double.parseDouble(coordinationNow[1]);
+                LatLng geoCoordination = new LatLng(first, second); // Создаём маркер
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(geoCoordination) // Добавляем маркер на карту
+                        .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)) // Задаём цвет маркеру
+                        .snippet(info));// Задаём нижнее описание
+                marker.setTag(i); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
+            }
         }
 
 
         mMap.setOnInfoWindowClickListener((GoogleMap.OnInfoWindowClickListener) this); // Нужна, чтобы обрабатывать действия при нажатии на окно
 
 
-        // Добавляет местоположение в текущее время
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
+
     }
 
     // Тут пишем то, что хотим видеть при нажатии на всплывающее окно
@@ -128,5 +150,4 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
         }
 
     }
-
 }

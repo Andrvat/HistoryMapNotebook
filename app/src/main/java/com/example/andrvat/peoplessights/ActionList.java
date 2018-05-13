@@ -15,8 +15,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.internal.IGoogleMapDelegate;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +34,7 @@ public class ActionList extends Fragment {
         View view = inflater.inflate(R.layout.fragment_action_list, container, false);
         // Inflate the layout for this fragment
 
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
+        final DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         ArrayList<String> actions = dataBaseHelper.getTitles();
 
         ListView listView = (ListView) view.findViewById(R.id.listView);
@@ -46,17 +49,16 @@ public class ActionList extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
-                if (position==0) {
-
-                } else if (position==1) {
-
-                } else if (position==2) {
-
-                } else if (position==3) {
-
-                } else if (position==4) {
-
-                }
+                ArrayList<String> coordination = dataBaseHelper.getCoordinations();
+                String[] coordinationNow = coordination.get(position).split(";");
+                double first = Double.parseDouble(coordinationNow[0]);
+                double second = Double.parseDouble(coordinationNow[1]);
+                LatLng geoCoordination = new LatLng(first, second);
+                CustomMapFragment customMapFragment = new CustomMapFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.containerId, customMapFragment);
+                transaction.commit();
             }
         });
 
