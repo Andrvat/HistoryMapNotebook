@@ -23,7 +23,7 @@
 
     <!--Код самсунга-->
     <!--AIzaSyD4ZLGj4zyJeZn5VXxQHAIivl_RnbFAYAg-->
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCZFlHdG-iFG-cOcsV1vNLu-ah5MM8qlQI</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD4ZLGj4zyJeZn5VXxQHAIivl_RnbFAYAg</string>
     <!--Домашний код-->
     <!--AIzaSyCZFlHdG-iFG-cOcsV1vNLu-ah5MM8qlQI-->
 </resources>

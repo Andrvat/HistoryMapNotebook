@@ -51,14 +51,18 @@ public class ActionList extends Fragment {
                                     long id) {
                 ArrayList<String> coordination = dataBaseHelper.getCoordinations();
                 String[] coordinationNow = coordination.get(position).split(";");
-                double first = Double.parseDouble(coordinationNow[0]);
-                double second = Double.parseDouble(coordinationNow[1]);
-                LatLng geoCoordination = new LatLng(first, second);
+                double lat = Double.parseDouble(coordinationNow[0]);
+                double lon = Double.parseDouble(coordinationNow[1]);
                 CustomMapFragment customMapFragment = new CustomMapFragment();
+                Bundle bundle = new Bundle();
+                bundle.putDouble("lat", lat);
+                bundle.putDouble("lon", lon);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.containerId, customMapFragment);
                 transaction.commit();
+                customMapFragment.setArguments(bundle);
+
             }
         });
 
