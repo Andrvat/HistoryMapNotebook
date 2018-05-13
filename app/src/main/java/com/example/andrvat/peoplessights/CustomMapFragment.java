@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CustomMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
@@ -54,54 +55,54 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
     @Override
     public void onMapReady(GoogleMap googleMap) {
         GoogleMap mMap = googleMap;
+        String info = "Нажмите на окно, чтобы узнать ход событий";
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
-        ArrayList<String> coordination = dataBaseHelper.getCoordinations();
-        String info = "Нажмите на окно, чтобы узнать ход событий";
-        ArrayList<String> name = dataBaseHelper.getTitles();
-        ArrayList<String> colors = dataBaseHelper.getColor();
+        ArrayList<HashMap<String,String>> mapArrayList = dataBaseHelper.getAll();
+
 
 
 
 
 
         // Добавляет маркеры
-        for (int i = 0; i < name.size(); i++) { // Циклом проходим по всем маркерам
-            if (colors.get(i).equals("Red")) {
-                String[] coordinationNow = coordination.get(i).split(";"); // Разделяем их координаты по ";"
-                double first = Double.parseDouble(coordinationNow[0]);
-                double second = Double.parseDouble(coordinationNow[1]);
+        for (int i = 0; i < mapArrayList.size(); i++) { // Циклом проходим по всем маркерам
+            if (mapArrayList.get(i).get("color").equals("Red")) {
+                double first = Double.parseDouble(mapArrayList.get(i).get("lat"));
+                double second = Double.parseDouble(mapArrayList.get(i).get("lon"));
                 LatLng geoCoordination = new LatLng(first, second); // Создаём маркер
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position(geoCoordination) // Добавляем маркер на карту
-                        .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
+                        .title(mapArrayList.get(i).get("title")) // Название места жирным шрифтом в сплывающем окошке
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)) // Задаём цвет маркеру
                         .snippet(info));// Задаём нижнее описание
-                marker.setTag(Integer.toString(i)); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
+                marker.setTag(mapArrayList.get(i).get("id")); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
-            } else if (colors.get(i).equals("Blue")) {
-                String[] coordinationNow = coordination.get(i).split(";"); // Разделяем их координаты по ";"
-                double first = Double.parseDouble(coordinationNow[0]);
-                double second = Double.parseDouble(coordinationNow[1]);
+
+
+            } else if (mapArrayList.get(i).get("color").equals("Blue")) {
+                double first = Double.parseDouble(mapArrayList.get(i).get("lat"));
+                double second = Double.parseDouble(mapArrayList.get(i).get("lon"));
                 LatLng geoCoordination = new LatLng(first, second); // Создаём маркер
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position(geoCoordination) // Добавляем маркер на карту
-                        .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)) // Задаём цвет маркеру
+                        .title(mapArrayList.get(i).get("title")) // Название места жирным шрифтом в сплывающем окошке
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)) // Задаём цвет маркеру
                         .snippet(info));// Задаём нижнее описание
-                marker.setTag(Integer.toString(i)); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
+                marker.setTag(mapArrayList.get(i).get("id")); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
-            } else if (colors.get(i).equals("Yellow")) {
-                String[] coordinationNow = coordination.get(i).split(";"); // Разделяем их координаты по ";"
-                double first = Double.parseDouble(coordinationNow[0]);
-                double second = Double.parseDouble(coordinationNow[1]);
+
+
+            } else if (mapArrayList.get(i).get("color").equals("Yellow")) {
+                double first = Double.parseDouble(mapArrayList.get(i).get("lat"));
+                double second = Double.parseDouble(mapArrayList.get(i).get("lon"));
                 LatLng geoCoordination = new LatLng(first, second); // Создаём маркер
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position(geoCoordination) // Добавляем маркер на карту
-                        .title(name.get(i)) // Название места жирным шрифтом в сплывающем окошке
+                        .title(mapArrayList.get(i).get("title")) // Название места жирным шрифтом в сплывающем окошке
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)) // Задаём цвет маркеру
                         .snippet(info));// Задаём нижнее описание
-                marker.setTag(Integer.toString(i)); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
+                marker.setTag(mapArrayList.get(i).get("id")); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
             }
         }
@@ -129,37 +130,6 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.containerId, historyFragment);
         transaction.commit();
-//        if (tag == 0) {
-//            Borodino borodino = new Borodino();
-//            FragmentManager fragmentManager = this.getFragmentManager();
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.replace(R.id.containerId, borodino);
-//            transaction.commit();
-//        } else if (tag == 1) {
-//            IceBattle iceBattle = new IceBattle();
-//            FragmentManager fragmentManager = this.getFragmentManager();
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.replace(R.id.containerId, iceBattle);
-//            transaction.commit();
-//        } else if (tag == 2) {
-//            BrusilovBreakthrough brusilovBreakthrough = new BrusilovBreakthrough();
-//            FragmentManager fragmentManager = this.getFragmentManager();
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.replace(R.id.containerId, brusilovBreakthrough);
-//            transaction.commit();
-//        } else if (tag == 3) {
-//            BattleOfKursk battleOfKursk = new BattleOfKursk();
-//            FragmentManager fragmentManager = this.getFragmentManager();
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.replace(R.id.containerId, battleOfKursk);
-//            transaction.commit();
-//        } else if (tag == 4) {
-//            StandingOnTheUgra standingOnTheUgra = new StandingOnTheUgra();
-//            FragmentManager fragmentManager = this.getFragmentManager();
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.replace(R.id.containerId, standingOnTheUgra);
-//            transaction.commit();
-//        }
 
     }
 }

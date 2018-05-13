@@ -114,21 +114,21 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     public ArrayList<HashMap<String, String>> getAll(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
-        String sql = "SELECT title, descriptionOne, descriptionTwo, pictureOne, pictureTwo FROM actions";
+        String sql = "SELECT _id, title, Latitude, Longitude, colorMarker FROM actions";
         Cursor cursor = readableDatabase.rawQuery(sql, null);
         ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
         while (cursor.moveToNext()) {
-            String title = cursor.getString(0);
-            String descriptionOne = cursor.getString(1);
-            String descriptionTwo = cursor.getString(2);
-            String pictureOne = cursor.getString(3);
-            String pictureTwo = cursor.getString(4);
+            String id = Integer.toString(cursor.getInt(0));
+            String title = cursor.getString(1);
+            String lat = Double.toString(cursor.getDouble(2));
+            String lon = Double.toString(cursor.getDouble(3));
+            String color = cursor.getString(4);
             HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put("id",id);
             hashMap.put("title", title);
-            hashMap.put("descriptionOne", descriptionOne);
-            hashMap.put("descriptionTwo", descriptionTwo);
-            hashMap.put("pictureOne", pictureOne);
-            hashMap.put("pictureTwo", pictureTwo);
+            hashMap.put("lat", lat);
+            hashMap.put("lon", lon);
+            hashMap.put("color", color);
             arrayList.add(hashMap);
         }
         return arrayList;
