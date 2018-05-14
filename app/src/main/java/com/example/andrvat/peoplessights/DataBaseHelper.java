@@ -4,11 +4,14 @@ import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -59,7 +62,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
 
 
-
     public ArrayList<String> getCoordinations(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
         String sql = "SELECT latitude, longitude FROM actions ";
@@ -95,22 +97,51 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     }
     public HashMap<String, String> getDescription(String id){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
-        String sql = "SELECT title, descriptionOne, descriptionTwo, pictureOne, pictureTwo FROM actions WHERE _id = ?";
+        String sql = "SELECT title, descriptionOne, descriptionTwo FROM actions WHERE _id = ?";
         Cursor cursor = readableDatabase.rawQuery(sql,new String[]{id});
         cursor.moveToNext();
         String title = cursor.getString(0);
         String descriptionOne = cursor.getString(1);
         String descriptionTwo = cursor.getString(2);
-        String pictureOne = cursor.getString(3);
-        String pictureTwo = cursor.getString(4);
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("title", title);
         hashMap.put("descriptionOne", descriptionOne);
         hashMap.put("descriptionTwo", descriptionTwo);
+        return hashMap;
+    }
+
+    public HashMap<String, Drawable> getPictures(String id){
+        AssetManager assetManager = context.getAssets();
+        SQLiteDatabase readableDatabase = this.getReadableDatabase();
+        String sql = "SELECT pictureOne, pictureTwo FROM actions WHERE _id = ?";
+        Cursor cursor = readableDatabase.rawQuery(sql,new String[]{id});
+        cursor.moveToNext();
+
+        String pictureOneName = cursor.getString(0);
+        String pictureTwoName = cursor.getString(1);
+
+        InputStream imageOneStream = null;
+        try {
+            imageOneStream = assetManager.open(pictureOneName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Drawable pictureOne = Drawable.createFromStream(imageOneStream, null);
+
+        InputStream imageTwoStream = null;
+        try {
+            imageTwoStream = assetManager.open(pictureTwoName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Drawable pictureTwo = Drawable.createFromStream(imageTwoStream, null);
+
+        HashMap<String, Drawable> hashMap = new HashMap<>();
         hashMap.put("pictureOne", pictureOne);
         hashMap.put("pictureTwo", pictureTwo);
         return hashMap;
     }
+
 
     public ArrayList<HashMap<String, String>> getAll(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
