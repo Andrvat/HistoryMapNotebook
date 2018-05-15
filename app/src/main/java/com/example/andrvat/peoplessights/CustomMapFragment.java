@@ -6,7 +6,9 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,7 +115,6 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(geoCoordination,8));
         }
         mMap.setOnInfoWindowClickListener((GoogleMap.OnInfoWindowClickListener) this); // Нужна, чтобы обрабатывать действия при нажатии на окно
-
 
 
     }
