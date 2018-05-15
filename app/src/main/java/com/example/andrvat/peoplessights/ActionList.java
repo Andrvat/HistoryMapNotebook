@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ActionList extends Fragment {
+    SearchView searchView;
 
     public ActionList() {
         // Required empty public constructor
@@ -42,12 +44,26 @@ public class ActionList extends Fragment {
         ArrayList<String> actions = dataBaseHelper.getTitles();
 
         ListView listView = (ListView) view.findViewById(R.id.listView);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        searchView = (SearchView) view.findViewById(R.id.searchView);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
                 actions
         );
         listView.setAdapter(arrayAdapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String text) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                arrayAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,9 +85,6 @@ public class ActionList extends Fragment {
 
             }
         });
-
-
-
         return view;
     }
 

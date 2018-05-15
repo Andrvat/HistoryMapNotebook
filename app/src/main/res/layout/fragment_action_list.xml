@@ -15,14 +15,16 @@
         android:orientation="vertical">
 
         <SearchView
-            android:id="@+id/searchview"
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="Введите название" />
+            android:queryHint="Введите название"
+            />
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            />
     </LinearLayout>
 </RelativeLayout>
