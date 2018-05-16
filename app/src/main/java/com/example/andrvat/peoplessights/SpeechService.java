@@ -10,6 +10,7 @@ import java.util.Locale;
 
 public class SpeechService extends IntentService {
     private TextToSpeech textToSpeech;
+    private boolean TTSready;
     public SpeechService() {
         super("SpeechService");
     }
@@ -20,7 +21,7 @@ public class SpeechService extends IntentService {
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int i) {
-
+                TTSready = true;
             }
         });
         textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener(){
@@ -45,16 +46,18 @@ public class SpeechService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         String textForSpeech = intent.getStringExtra("textForSpeech");
+        while (true){
+            if(TTSready){
+                break;
+            }else {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         textToSpeech.setLanguage(Locale.getDefault());
         textToSpeech.speak(textForSpeech, TextToSpeech.QUEUE_ADD, null, null);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(textToSpeech != null){
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-        }
     }
 }

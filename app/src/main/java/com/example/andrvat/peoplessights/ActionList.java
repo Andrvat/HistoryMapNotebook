@@ -3,6 +3,7 @@ package com.example.andrvat.peoplessights;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -13,8 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ import java.util.Collections;
 
 public class ActionList extends Fragment {
     SearchView searchView;
+    Cursor cursor;
 
     public ActionList() {
         // Required empty public constructor
@@ -45,6 +49,9 @@ public class ActionList extends Fragment {
 
         ListView listView = (ListView) view.findViewById(R.id.listView);
         searchView = (SearchView) view.findViewById(R.id.searchView);
+        cursor = dataBaseHelper.gettAllDATA();
+
+
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
@@ -66,6 +73,7 @@ public class ActionList extends Fragment {
         });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {

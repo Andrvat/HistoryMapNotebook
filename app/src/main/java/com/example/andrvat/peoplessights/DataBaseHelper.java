@@ -162,8 +162,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             hashMap.put("color", color);
             arrayList.add(hashMap);
         }
+
         return arrayList;
     }
 
+
+
+    public Cursor gettAllDATA() {
+        SQLiteDatabase readableDatabase = this.getReadableDatabase();
+        Cursor actions = readableDatabase.query("actions", null, null, null, null, null, null);
+        return actions;
+    }
 
 }

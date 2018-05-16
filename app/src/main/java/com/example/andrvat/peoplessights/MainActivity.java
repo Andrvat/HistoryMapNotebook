@@ -63,11 +63,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+
+            drawer.openDrawer(GravityCompat.START);
     }
 
     @Override
@@ -122,6 +119,8 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.containerId, actionList);
             transaction.commit();
+        } else if (id == R.id.nav_exit) {
+            System.exit(0);
         }
             //Конец
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
