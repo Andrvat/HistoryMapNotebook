@@ -21,6 +21,8 @@ import java.util.Scanner;
 
 
 public class DataBaseHelper extends SQLiteOpenHelper{
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_TITLE = "title";
 
     private Context context;
 
@@ -168,10 +170,12 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
 
 
-    public Cursor gettAllDATA() {
+
+    public Cursor getTitlesTEST(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
-        Cursor actions = readableDatabase.query("actions", null, null, null, null, null, null);
-        return actions;
+        String sql = "SELECT _id, title FROM actions";
+        Cursor cursor = readableDatabase.rawQuery(sql,null);
+        return cursor;
     }
 
 }

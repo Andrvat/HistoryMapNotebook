@@ -2,37 +2,23 @@ package com.example.andrvat.peoplessights;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.internal.IGoogleMapDelegate;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ActionList extends Fragment {
     SearchView searchView;
-    Cursor cursor;
+    Cursor userCursor;
+    SimpleCursorAdapter userAdapter;
 
     public ActionList() {
         // Required empty public constructor
@@ -49,15 +35,24 @@ public class ActionList extends Fragment {
 
         ListView listView = (ListView) view.findViewById(R.id.listView);
         searchView = (SearchView) view.findViewById(R.id.searchView);
-        cursor = dataBaseHelper.gettAllDATA();
-
-
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        userCursor = dataBaseHelper.getTitlesTEST();
+        final String[] headers = new String[] {DataBaseHelper.COLUMN_TITLE};
+        userAdapter = new SimpleCursorAdapter(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
-                actions
-        );
-        listView.setAdapter(arrayAdapter);
+                userCursor,
+                headers,
+                new int[] {android.R.id.text1},
+                0
+                );
+        listView.setAdapter(userAdapter);
+
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+//                getActivity(),
+//                android.R.layout.simple_list_item_1,
+//                actions
+//        );
+//        listView.setAdapter(arrayAdapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -67,7 +62,7 @@ public class ActionList extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                arrayAdapter.getFilter().filter(newText);
+                userAdapter.getFilterQueryProvider();
                 return false;
             }
         });

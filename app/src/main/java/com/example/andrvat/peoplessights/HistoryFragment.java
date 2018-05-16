@@ -48,6 +48,8 @@ public class HistoryFragment extends Fragment {
         HashMap<String, Drawable> getPictures = dataBaseHelper.getPictures(id);
         View frameLayout = inflater.inflate(R.layout.fragment_historyfragment, container, false);
         FloatingActionButton b =  frameLayout.findViewById(R.id.fab);
+
+
 //        FloatingActionButton b2 = frameLayout.findViewById(R.id.fab2);
 //        b.setOnClickListener(new View.OnClickListener() {
 //            @Override
