@@ -1,11 +1,13 @@
 package com.example.andrvat.peoplessights;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +40,7 @@ public class HistoryFragment extends Fragment {
     private TextToSpeech textToSpeech;
     int StopORPlay = 0;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,15 +62,21 @@ public class HistoryFragment extends Fragment {
 
 
         TextView MainTitleView = frameLayout.findViewById(R.id.maintitle);
+        MainTitleView.setTypeface(Typeface.createFromAsset(
+                getActivity().getAssets(), "fonts/verdanab.ttf"));
         MainTitleView.setText(information.get("title")); // Задаём заголовок
 
         TextView DescriptionOneView = frameLayout.findViewById(R.id.descriptionone);
+        DescriptionOneView.setTypeface(Typeface.createFromAsset(
+                getActivity().getAssets(), "fonts/verdana.ttf"));
         DescriptionOneView.setText(information.get("descriptionOne")); // Задаём первое описание
 
         ImageView pictureOneView = frameLayout.findViewById(R.id.pictureone);// Задаём первую картинку
         pictureOneView.setImageDrawable(getPictures.get("pictureOne"));
 
         TextView DescriptionTwoView = frameLayout.findViewById(R.id.descriptiontwo);
+        DescriptionTwoView.setTypeface(Typeface.createFromAsset(
+                getActivity().getAssets(), "fonts/verdana.ttf"));
         DescriptionTwoView.setText(information.get("descriptionTwo")); // Задаём второе описание
 
 

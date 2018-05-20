@@ -73,6 +73,6 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@android:drawable/ic_lock_silent_mode_off"
-        app:backgroundTint="@android:color/darker_gray" />
+        app:backgroundTint="@color/Cherry" />
 
 </FrameLayout>

@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class ActionList extends Fragment {
     Cursor userCursor;
     SimpleCursorAdapter userAdapter;
     ListView listView;
+    public static boolean check_two = false;
 
     public ActionList() {
         // Required empty public constructor
@@ -28,7 +30,7 @@ public class ActionList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_action_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_action_list, container, false);
         // Inflate the layout for this fragment
 
         final DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
@@ -92,6 +94,13 @@ public class ActionList extends Fragment {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.containerId, customMapFragment);
                 transaction.commit();
+                if (MainActivity.check==false && check_two == false) {
+                    MainActivity.check = true; // Задаёт снэкбар при первом (и только при первом!) открытии фрагмента карты - какой цвет маркера какому периоду соответствует
+                    check_two = true;
+                    Snackbar snackbar = Snackbar.make(view,"Советский Союз - красные, Российская империя - синие, Русь - жёлтые",Snackbar.LENGTH_LONG);
+                    snackbar.setDuration(5000);
+                    snackbar.show();
+                }
                 customMapFragment.setArguments(bundle);
 
             }

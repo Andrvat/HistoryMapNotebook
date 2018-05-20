@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,8 +25,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
-
+    public static boolean check = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -98,6 +97,13 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.containerId, customMapFragment);
             transaction.commit();
+            if (check==false) {
+                check = true; // Задаёт снэкбар при первом (и только при первом!) открытии фрагмента карты - какой цвет маркера какому периоду соответствует
+                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Советский Союз - красные, Российская империя - синие, Русь - жёлтые",Snackbar.LENGTH_LONG);
+                snackbar.setDuration(5000);
+                snackbar.show();
+            }
+
         }  else if (id == R.id.nav_about) { // Переход в описание
             CustomAboutFragment customAboutFragment = new CustomAboutFragment();
             FragmentManager fragmentManager = this.getFragmentManager();

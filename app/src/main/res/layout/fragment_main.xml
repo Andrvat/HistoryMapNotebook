@@ -12,57 +12,41 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="wrap_content"
-            android:layout_height="146dp"
-            android:src="@drawable/jid" />
-
         <TextView
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:autoText="false"
             android:padding="10dp"
-            android:text="Как пользоваться?"
+            android:text="Добро пожаловать в наше приложение!"
             android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="28sp" />
+            android:textColor="@color/Cherry"
+            android:textSize="30sp"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingEnd="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="1. Откройте карту через меню."
-            android:textAlignment="textStart"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingEnd="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="2. Выберите нужное событие."
-            android:textAlignment="textStart"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp" />
+            android:layout_marginTop="100dp"
+            android:text="Изучайте историю вместе с нами!"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/Cherry"
+            android:textSize="30sp"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingEnd="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="3. Изучайте историю вместе с нами!"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorAccent"
-            android:textSize="22sp" />
+            android:layout_marginTop="100dp"
+            android:text="Для продолжения проведите по экрану слева на право..."
+            android:textAlignment="center"
+            android:textColor="@color/Cherry"
+            android:textSize="30sp"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
 
