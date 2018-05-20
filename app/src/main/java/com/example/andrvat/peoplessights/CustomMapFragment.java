@@ -112,7 +112,7 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
         Bundle bundle = getArguments();
         if(bundle != null) {
             LatLng geoCoordination = new LatLng(bundle.getDouble("lat"), bundle.getDouble("lon"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(geoCoordination,8));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(geoCoordination,8)); // Перемещаем камеру при нажатии на событие из ListView
         }
         mMap.setOnInfoWindowClickListener((GoogleMap.OnInfoWindowClickListener) this); // Нужна, чтобы обрабатывать действия при нажатии на окно
 

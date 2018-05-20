@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
 
 
@@ -80,12 +82,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -95,31 +91,31 @@ public class MainActivity extends AppCompatActivity
         // Навигация по фрагментам с помощью шторки Navigation Drawer
         int id = item.getItemId();
 
-        if (id == R.id.nav_map) {
+        if (id == R.id.nav_map) { // Переход на карту
             CustomMapFragment customMapFragment = new CustomMapFragment();
             FragmentManager fragmentManager = this.getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.containerId, customMapFragment);
             transaction.commit();
-        }  else if (id == R.id.nav_about) {
+        }  else if (id == R.id.nav_about) { // Переход в описание
             CustomAboutFragment customAboutFragment = new CustomAboutFragment();
             FragmentManager fragmentManager = this.getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.containerId, customAboutFragment);
             transaction.commit();
-        } else if (id == R.id.nav_home) {
+        } else if (id == R.id.nav_home) { // Переход на главную страницу
             CustomMainFragment customMainFragment = new CustomMainFragment();
             FragmentManager fragmentManager = this.getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.containerId, customMainFragment);
             transaction.commit();
-        } else if (id == R.id.nav_list) {
+        } else if (id == R.id.nav_list) { // Переход на список событий
             ActionList actionList = new ActionList();
             FragmentManager fragmentManager = this.getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.containerId, actionList);
             transaction.commit();
-        } else if (id == R.id.nav_exit) {
+        } else if (id == R.id.nav_exit) { // Закрывает приложение
             System.exit(0);
         }
             //Конец

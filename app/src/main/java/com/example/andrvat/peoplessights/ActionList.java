@@ -19,6 +19,7 @@ public class ActionList extends Fragment {
     SearchView searchView;
     Cursor userCursor;
     SimpleCursorAdapter userAdapter;
+    ListView listView;
 
     public ActionList() {
         // Required empty public constructor
@@ -33,11 +34,11 @@ public class ActionList extends Fragment {
         final DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         ArrayList<String> actions = dataBaseHelper.getTitles();
 
-        ListView listView = (ListView) view.findViewById(R.id.listView);
+        listView = (ListView) view.findViewById(R.id.listView);
         searchView = (SearchView) view.findViewById(R.id.searchView);
-        userCursor = dataBaseHelper.getTitlesTEST();
+        userCursor = dataBaseHelper.getTitlesTEST(); // Получаем курсор
         final String[] headers = new String[] {DataBaseHelper.COLUMN_TITLE};
-        userAdapter = new SimpleCursorAdapter(
+        userAdapter = new SimpleCursorAdapter( // Заполняем ListView, используя SimpleCursorAdapter
                 getActivity(),
                 android.R.layout.simple_list_item_1,
                 userCursor,
@@ -47,13 +48,8 @@ public class ActionList extends Fragment {
                 );
         listView.setAdapter(userAdapter);
 
-//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-//                getActivity(),
-//                android.R.layout.simple_list_item_1,
-//                actions
-//        );
-//        listView.setAdapter(arrayAdapter);
 
+        // Фильтруем текст
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String text) {
@@ -62,18 +58,30 @@ public class ActionList extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                userAdapter.getFilterQueryProvider();
+                userCursor = dataBaseHelper.getTitlesSearch(newText);
+                final String[] headers = new String[] {DataBaseHelper.COLUMN_TITLE};
+                userAdapter = new SimpleCursorAdapter(
+                        getActivity(),
+                        android.R.layout.simple_list_item_1,
+                        userCursor,
+                        headers,
+                        new int[] {android.R.id.text1},
+                        0
+                );
+                listView.setAdapter(userAdapter); // Задаём пользователю новый список в зависимости от того,
+                // что он написал в SearchView
                 return false;
             }
         });
 
+        // Обрабатываем нажатие по элементу ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {
                 ArrayList<String> coordination = dataBaseHelper.getCoordinations();
-                String[] coordinationNow = coordination.get(position).split(";");
+                String[] coordinationNow = coordination.get((int) id - 1).split(";");
                 double lat = Double.parseDouble(coordinationNow[0]);
                 double lon = Double.parseDouble(coordinationNow[1]);
                 CustomMapFragment customMapFragment = new CustomMapFragment();

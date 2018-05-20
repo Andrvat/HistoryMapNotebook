@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
@@ -18,6 +20,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import java.util.HashMap;
 
@@ -31,15 +35,19 @@ import java.util.HashMap;
 public class HistoryFragment extends Fragment {
 
     public String sound = "";
-
+    private TextToSpeech textToSpeech;
+    int StopORPlay = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        // Inflate the layout for this fragment
-
+        textToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+            }
+        });
 
         Bundle bundle = getArguments();
         String id = bundle.getString("id"); // получаем id, на который пользователь нажал
@@ -47,57 +55,9 @@ public class HistoryFragment extends Fragment {
         HashMap<String,String> information = dataBaseHelper.getDescription(id); // получаем информацию из БД
         HashMap<String, Drawable> getPictures = dataBaseHelper.getPictures(id);
         View frameLayout = inflater.inflate(R.layout.fragment_historyfragment, container, false);
-        FloatingActionButton b =  frameLayout.findViewById(R.id.fab);
+        FloatingActionButton b =  frameLayout.findViewById(R.id.fab); // Находим кнопку
 
 
-//        FloatingActionButton b2 = frameLayout.findViewById(R.id.fab2);
-//        b.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getActivity(),"ЗВУК!",Toast.LENGTH_LONG).show();
-//                String textForSpeech = sound;
-//                Intent intent = new Intent(getActivity(), SpeechService.class);
-//                intent.putExtra("textForSpeech", textForSpeech);
-//                getActivity().startService(intent);
-//            }
-//        });
-//        b2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), SpeechService.class);
-//                getActivity().stopService(intent);
-//            }
-//        });
-        b.setOnClickListener(new View.OnClickListener() {
-            int i = 0;
-            @Override
-            public void onClick(View v) {
-                i++;
-                Handler handler = new Handler();
-                Runnable r = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        i = 0;
-                    }
-                };
-
-                if (i == 1) {
-                    Intent intent = new Intent(getActivity(), SpeechService.class);
-                    getActivity().stopService(intent);
-                    handler.postDelayed(r, 250);
-                } else if (i == 2) {
-                    Toast.makeText(getActivity(),"ЗВУК!",Toast.LENGTH_LONG).show();
-                    String textForSpeech = sound;
-                    Intent intent = new Intent(getActivity(), SpeechService.class);
-                    intent.putExtra("textForSpeech", textForSpeech);
-                    getActivity().startService(intent);
-                    i = 0;
-                }
-
-
-            }
-        });
         TextView MainTitleView = frameLayout.findViewById(R.id.maintitle);
         MainTitleView.setText(information.get("title")); // Задаём заголовок
 
@@ -114,8 +74,22 @@ public class HistoryFragment extends Fragment {
         ImageView pictureTwoView = frameLayout.findViewById(R.id.picturetwo); // Задаём вторую картинку
         pictureTwoView.setImageDrawable(getPictures.get("pictureTwo"));
 
-        sound = information.get("descriptionOne") + " " + information.get("descriptionTwo");
+        sound = information.get("descriptionOne") + " " + information.get("descriptionTwo"); // Задаем, что говорилка будет проговаривать
 
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (StopORPlay%2==0) { // Если чётное нажатие, то говорим
+                    textToSpeech.speak(sound, TextToSpeech.QUEUE_ADD, null, null);
+                    StopORPlay++;
+                    Toast.makeText(getActivity(),"Чтобы остановить звучание, нажмите на кнопку ещё раз...",Toast.LENGTH_LONG).show();
+                } else { // Если нет, то останавливаем
+                    textToSpeech.stop();
+                    StopORPlay++;
+                }
+
+            }
+        });
         return frameLayout;
     }
 

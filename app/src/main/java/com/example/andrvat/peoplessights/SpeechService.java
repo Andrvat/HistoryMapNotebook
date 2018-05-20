@@ -60,4 +60,14 @@ public class SpeechService extends IntentService {
         textToSpeech.setLanguage(Locale.getDefault());
         textToSpeech.speak(textForSpeech, TextToSpeech.QUEUE_ADD, null, null);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean stopService(Intent name) {
+        return super.stopService(name);
+    }
 }

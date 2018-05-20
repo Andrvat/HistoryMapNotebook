@@ -48,7 +48,6 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             in = new Scanner(inputStream);
             while (in.hasNext()) {
                 String s = in.nextLine();
-                // dfd
                 sqLiteDatabase.execSQL(s);
             }
         } catch (Exception e) {
@@ -63,7 +62,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     }
 
 
-
+    // Получает все координаты
     public ArrayList<String> getCoordinations(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
         String sql = "SELECT latitude, longitude FROM actions ";
@@ -77,6 +76,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         }
         return hashMap;
     }
+
+    // Получает названия событий
     public ArrayList<String> getTitles(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
         String sql = "SELECT title FROM actions ";
@@ -87,6 +88,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         }
         return hashMap;
     }
+
+    // Получает все цвета маркеров
     public ArrayList<String> getColor(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
         String sql = "SELECT colorMarker FROM actions ";
@@ -97,6 +100,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         }
         return hashMap;
     }
+
+    // Получает описание
     public HashMap<String, String> getDescription(String id){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
         String sql = "SELECT title, descriptionOne, descriptionTwo FROM actions WHERE _id = ?";
@@ -112,6 +117,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         return hashMap;
     }
 
+    // Получает картинки из БД
     public HashMap<String, Drawable> getPictures(String id){
         AssetManager assetManager = context.getAssets();
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
@@ -144,7 +150,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         return hashMap;
     }
 
-
+    // Получает все данные из БД
     public ArrayList<HashMap<String, String>> getAll(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
         String sql = "SELECT _id, title, Latitude, Longitude, colorMarker FROM actions";
@@ -170,12 +176,23 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
 
 
-
+    // Получает курсор id и title со всей БД
     public Cursor getTitlesTEST(){
         SQLiteDatabase readableDatabase = this.getReadableDatabase();
         String sql = "SELECT _id, title FROM actions";
         Cursor cursor = readableDatabase.rawQuery(sql,null);
         return cursor;
     }
+
+    // Сортировка списка (оставляет те элементы, где есть searchString
+    public Cursor getTitlesSearch(String searchString){
+        SQLiteDatabase readableDatabase = this.getReadableDatabase();
+        String sql = "SELECT _id, title FROM actions WHERE title LIKE '%"+searchString+"%'";
+        Cursor cursor = readableDatabase.rawQuery(sql,null);
+        return cursor;
+    }
+
+
+
 
 }
