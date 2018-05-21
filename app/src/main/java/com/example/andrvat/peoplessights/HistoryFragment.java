@@ -65,21 +65,16 @@ public class HistoryFragment extends Fragment {
         MainTitleView.setTypeface(Typeface.createFromAsset(
                 getActivity().getAssets(), "fonts/verdanab.ttf"));
         MainTitleView.setText(information.get("title")); // Задаём заголовок
-
         TextView DescriptionOneView = frameLayout.findViewById(R.id.descriptionone);
         DescriptionOneView.setTypeface(Typeface.createFromAsset(
                 getActivity().getAssets(), "fonts/verdana.ttf"));
         DescriptionOneView.setText(information.get("descriptionOne")); // Задаём первое описание
-
         ImageView pictureOneView = frameLayout.findViewById(R.id.pictureone);// Задаём первую картинку
         pictureOneView.setImageDrawable(getPictures.get("pictureOne"));
-
         TextView DescriptionTwoView = frameLayout.findViewById(R.id.descriptiontwo);
         DescriptionTwoView.setTypeface(Typeface.createFromAsset(
                 getActivity().getAssets(), "fonts/verdana.ttf"));
         DescriptionTwoView.setText(information.get("descriptionTwo")); // Задаём второе описание
-
-
         ImageView pictureTwoView = frameLayout.findViewById(R.id.picturetwo); // Задаём вторую картинку
         pictureTwoView.setImageDrawable(getPictures.get("pictureTwo"));
 
@@ -91,7 +86,11 @@ public class HistoryFragment extends Fragment {
                 if (StopORPlay%2==0) { // Если чётное нажатие, то говорим
                     textToSpeech.speak(sound, TextToSpeech.QUEUE_ADD, null, null);
                     StopORPlay++;
-                    Toast.makeText(getActivity(),"Чтобы остановить звучание, нажмите на кнопку ещё раз...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),
+                            "Чтобы остановить звучание," +
+                            " нажмите на кнопку ещё раз...",
+                            Toast.LENGTH_LONG)
+                            .show();
                 } else { // Если нет, то останавливаем
                     textToSpeech.stop();
                     StopORPlay++;

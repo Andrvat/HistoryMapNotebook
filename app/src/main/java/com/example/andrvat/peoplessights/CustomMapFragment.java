@@ -61,16 +61,11 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
     @Override
     public void onMapReady(GoogleMap googleMap) {
         GoogleMap mMap = googleMap;
+        LatLng first_camera = new LatLng(51.512400, 34.816516); // Перемещает камеру поближе к Европе
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(first_camera,0));
         String info = "Нажмите на окно, чтобы узнать ход событий";
-
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         ArrayList<HashMap<String,String>> mapArrayList = dataBaseHelper.getAll();
-
-
-
-
-
-
         // Добавляет маркеры
         for (int i = 0; i < mapArrayList.size(); i++) { // Циклом проходим по всем маркерам
             if (mapArrayList.get(i).get("color").equals("Red")) {
@@ -83,8 +78,7 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)) // Задаём цвет маркеру
                         .snippet(info));// Задаём нижнее описание
                 marker.setTag(mapArrayList.get(i).get("id")); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
-
+                                                        //  . . .
 
             } else if (mapArrayList.get(i).get("color").equals("Blue")) {
                 double first = Double.parseDouble(mapArrayList.get(i).get("lat"));
@@ -96,7 +90,6 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)) // Задаём цвет маркеру
                         .snippet(info));// Задаём нижнее описание
                 marker.setTag(mapArrayList.get(i).get("id")); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
 
 
             } else if (mapArrayList.get(i).get("color").equals("Yellow")) {
@@ -109,7 +102,6 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)) // Задаём цвет маркеру
                         .snippet(info));// Задаём нижнее описание
                 marker.setTag(mapArrayList.get(i).get("id")); // Задаёт тэг (как будем этот маркер обозначать, чтобы работать с ним)
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(geoCoordination));
             }
         }
 

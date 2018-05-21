@@ -99,7 +99,11 @@ public class MainActivity extends AppCompatActivity
             transaction.commit();
             if (check==false) {
                 check = true; // Задаёт снэкбар при первом (и только при первом!) открытии фрагмента карты - какой цвет маркера какому периоду соответствует
-                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Советский Союз - красные, Российская империя - синие, Русь - жёлтые",Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
+                        "Советский Союз - красные, " +
+                                "Российская империя - синие," +
+                                " Русь - жёлтые",
+                        Snackbar.LENGTH_LONG);
                 snackbar.setDuration(5000);
                 snackbar.show();
             }

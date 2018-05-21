@@ -35,7 +35,6 @@ public class ActionList extends Fragment {
 
         final DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         ArrayList<String> actions = dataBaseHelper.getTitles();
-
         listView = (ListView) view.findViewById(R.id.listView);
         searchView = (SearchView) view.findViewById(R.id.searchView);
         userCursor = dataBaseHelper.getTitlesTEST(); // Получаем курсор
@@ -49,8 +48,6 @@ public class ActionList extends Fragment {
                 0
                 );
         listView.setAdapter(userAdapter);
-
-
         // Фильтруем текст
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -78,7 +75,6 @@ public class ActionList extends Fragment {
 
         // Обрабатываем нажатие по элементу ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                     long id) {

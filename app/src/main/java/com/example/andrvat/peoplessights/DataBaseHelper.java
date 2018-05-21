@@ -31,17 +31,14 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     }
 
     public DataBaseHelper(Context cnt){
-        super(cnt, "test_db_info_six", null, 1);
+        super(cnt, "test_db_info_nine", null, 1);
         this.context = cnt;
     }
 
     //Выполняется при создании базы данных, нужно написать код для создания таблиц
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
         AssetManager assetManager = context.getAssets();
-
-
         Scanner in;
         try {
             InputStream inputStream = assetManager.open("test.txt");
