@@ -31,7 +31,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     }
 
     public DataBaseHelper(Context cnt){
-        super(cnt, "test_db_info_nine", null, 1);
+        super(cnt, "database_historymap", null, 1);
         this.context = cnt;
     }
 
