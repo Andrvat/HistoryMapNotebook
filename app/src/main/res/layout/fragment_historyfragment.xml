@@ -44,8 +44,7 @@
                 android:adjustViewBounds="true"
                 android:padding="10dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                 />
+                android:paddingRight="10dp" />
 
             <TextView
                 android:id="@+id/descriptiontwo"

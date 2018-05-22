@@ -39,6 +39,17 @@ public class HistoryFragment extends Fragment {
     public String sound = "";
     private TextToSpeech textToSpeech;
     int StopORPlay = 0;
+    private static boolean isTabletModeDetermined = false;
+    private static boolean isTabletMode = false;
+
+    public static boolean isTablet(Context paramContext) {
+        if (!isTabletModeDetermined) {
+            if (paramContext.getResources().getConfiguration().smallestScreenWidthDp>= 600)
+                isTabletMode = true;
+            isTabletModeDetermined = true;
+        }
+        return isTabletMode;
+    }
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -65,16 +76,25 @@ public class HistoryFragment extends Fragment {
         MainTitleView.setTypeface(Typeface.createFromAsset(
                 getActivity().getAssets(), "fonts/verdanab.ttf"));
         MainTitleView.setText(information.get("title")); // Задаём заголовок
+        if(isTablet(getActivity())) {
+            MainTitleView.setTextSize(35);
+        }
         TextView DescriptionOneView = frameLayout.findViewById(R.id.descriptionone);
         DescriptionOneView.setTypeface(Typeface.createFromAsset(
                 getActivity().getAssets(), "fonts/verdana.ttf"));
         DescriptionOneView.setText(information.get("descriptionOne")); // Задаём первое описание
+        if(isTablet(getActivity())) {
+            DescriptionOneView.setTextSize(20);
+        }
         ImageView pictureOneView = frameLayout.findViewById(R.id.pictureone);// Задаём первую картинку
         pictureOneView.setImageDrawable(getPictures.get("pictureOne"));
         TextView DescriptionTwoView = frameLayout.findViewById(R.id.descriptiontwo);
         DescriptionTwoView.setTypeface(Typeface.createFromAsset(
                 getActivity().getAssets(), "fonts/verdana.ttf"));
         DescriptionTwoView.setText(information.get("descriptionTwo")); // Задаём второе описание
+        if(isTablet(getActivity())) {
+            DescriptionTwoView.setTextSize(20);
+        }
         ImageView pictureTwoView = frameLayout.findViewById(R.id.picturetwo); // Задаём вторую картинку
         pictureTwoView.setImageDrawable(getPictures.get("pictureTwo"));
 
