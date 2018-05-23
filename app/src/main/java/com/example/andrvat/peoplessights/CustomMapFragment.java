@@ -52,6 +52,7 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback, G
         super.onActivityCreated(savedInstanceState);
         //получам объект активности для того, чтобы можно было выполнить функцию findViewById
         Activity activity = this.getActivity();
+        MainActivity.toolbar_public.setTitle("Интерактивная карта");
         //Находим элемент
         mapView = activity.findViewById(R.id.mapView);
         //Заставляем загрузиться картам

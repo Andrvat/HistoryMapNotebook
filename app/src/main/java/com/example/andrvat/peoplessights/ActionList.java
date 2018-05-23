@@ -33,6 +33,8 @@ public class ActionList extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_action_list, container, false);
         // Inflate the layout for this fragment
 
+        MainActivity.toolbar_public.setTitle("Список событий");
+
         final DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         ArrayList<String> actions = dataBaseHelper.getTitles();
         listView = (ListView) view.findViewById(R.id.listView);
