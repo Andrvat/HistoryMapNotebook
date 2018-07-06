@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "292304137741",
+    "firebase_url": "https://historymap-3330e.firebaseio.com",
+    "project_id": "historymap-3330e",
+    "storage_bucket": "historymap-3330e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292304137741:android:378cd9cd8d3454c1",
+        "android_client_info": {
+          "package_name": "com.example.andrvat.peoplessights"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292304137741-okql7569j7qc044r3vb5n7buu5es5sc8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.andrvat.peoplessights",
+            "certificate_hash": "600772039be645a73251c8caa8bfca596c11c639"
+          }
+        },
+        {
+          "client_id": "292304137741-covb1go0qvicu03an3841ac8p6s6m7ut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0acEn06uKeGWLbsRvr9W6htr41kWNjnI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292304137741-covb1go0qvicu03an3841ac8p6s6m7ut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
